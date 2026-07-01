@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Front Camera</title>
+<style>
+    body{
+        margin:0;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+        background:#000;
+    }
+    video{
+        width:100%;
+        height:100%;
+        object-fit:cover;
+    }
+</style>
+</head>
+<body>
+
+<video id="video" autoplay playsinline muted></video>
+
+<script>
+async function startFrontCamera() {
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+            video: {
+                facingMode: "user"
+            },
+            audio: false
+        });
+
+        document.getElementById("video").srcObject = stream;
+    } catch (err) {
+        alert("Camera access denied or unavailable.\n\n" + err.message);
+    }
+}
+
+startFrontCamera();
+</script>
+
+</body>
+</html>
